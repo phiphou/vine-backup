@@ -1,0 +1,15 @@
+{
+  "name": "vine-backup",
+  "version": "1.0.0",
+  "description": "A very basic tool for downloading your Vines before the service shut down.",
+  "main": "app.js",
+  "author": "Phiphou",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./src/app.js"
+  },
+  "dependencies": {
+    "download-file": "^0.1.5",
+    "vineapple": "^0.1.5"
+  }
+}
