@@ -10,7 +10,6 @@ First, clone or fork this repo and install the project.
 $ git clone --depth 1 https://github.com/phiphou/vine-backup.git
 $ cd vine-backup
 $ npm install
-$ node app
 ```
 Then, update [`./src/app.js`](https://github.com/phiphou/vine-backup/blob/master/src/app.js) file, [lines 4 and 5](https://github.com/phiphou/vine-backup/blob/master/src/app.js#L4-L5), with your Vines credentials:
 
