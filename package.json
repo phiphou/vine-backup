@@ -2,9 +2,16 @@
   "name": "vine-backup",
   "version": "1.0.0",
   "description": "A very basic tool for downloading your Vines before the service shut down.",
-  "main": "app.js",
   "author": "Phiphou",
   "license": "MIT",
+  "homepage": "https://github.com/phiphou/vine-backup#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phiphou/vine-backup"
+  },
+  "bugs": {
+    "url": "https://github.com/phiphou/vine-backup/issues"
+  },
   "scripts": {
     "start": "node ./src/app.js"
   },
