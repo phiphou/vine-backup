@@ -1,14 +1,22 @@
 const Vineapple = require('vineapple');
 const download = require('download-file')
 const vine = new Vineapple()
-const email = "YOUR_EMAIL"
-const password = "YOUR_PASSWORD"
+var argv = require('yargs').argv;
 let videos = []
 
-console.log('Getting Vines list...')
-vine.login(email, password, function(error, client) {
-  getList(client)
-});
+if (!argv.email) {
+  console.log('You must specify an email arg, like -email MY_EMAIL@MY_PROVIDER.COM')
+} else if (!argv.password) {
+  console.log('You must specify a password arg, like -password MY_PASSWORD')
+} else {
+  console.log('Getting Vines list...')
+  vine.login(argv.email, argv.password, function(error, client) {
+    if(error)
+      console.log('Unable to connect, please check your credentials.')
+    else
+      getList(client)
+  })
+}
 
 function getList(client, page = 0) {
   client.user(client.userId, {page: page}, (error, user) => {
@@ -24,7 +32,10 @@ function getList(client, page = 0) {
 }
 
 function dl() {
-  download(videos[0].videoUrl, {directory: "Vines", filename: videos[0].postId + '.mp4'}, err => {
+  download(videos[0].videoUrl, {
+    directory: "Vines",
+    filename: videos[0].postId + '.mp4'
+  }, err => {
     if (err)
       console.log(err, videos[0].postId)
     videos.shift()

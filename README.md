@@ -11,17 +11,11 @@ $ git clone --depth 1 https://github.com/phiphou/vine-backup.git
 $ cd vine-backup
 $ npm install
 ```
-Then, update [`./src/app.js`](https://github.com/phiphou/vine-backup/blob/master/src/app.js) file, [lines 4 and 5](https://github.com/phiphou/vine-backup/blob/master/src/app.js#L4-L5), with your Vines credentials:
 
-```javascript
-const email = "YOUR_EMAIL"
-const password = "YOUR_PASSWORD"
-```
-
-Finally, run the app with
+Then, run the app with
 
 ```bash
-$ npm start
+$ node src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD
 ```
 
 The app will get the list of all your Vines and download them sequentially in the `Vines` folder.

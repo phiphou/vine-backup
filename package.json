@@ -12,11 +12,9 @@
   "bugs": {
     "url": "https://github.com/phiphou/vine-backup/issues"
   },
-  "scripts": {
-    "start": "node ./src/app.js"
-  },
   "dependencies": {
     "download-file": "^0.1.5",
-    "vineapple": "^0.1.5"
+    "vineapple": "^0.1.5",
+    "yargs": "^6.3.0"
   }
 }
