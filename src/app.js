@@ -1,7 +1,7 @@
 const Vineapple = require('vineapple');
 const download = require('download-file')
+const argv = require('yargs').argv
 const vine = new Vineapple()
-var argv = require('yargs').argv;
 let videos = []
 
 if (!argv.email) {
