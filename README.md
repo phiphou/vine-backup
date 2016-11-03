@@ -5,11 +5,13 @@
 
 # vine-backup
 
-A very basic project to backup your **[Vines](https://vine.co/)** before the service shut down, as **[announced](http://blog.vine.co/post/152386882201/important-news-about-vine)** recently.
+A very basic project to backup your **[Vines](https://vine.co/)** (and optionnaly the one you liked) before the service shut down, as **[announced](http://blog.vine.co/post/152386882201/important-news-about-vine)** recently.
 
 ## Install
 
-First, clone or fork this repo and install the project.
+First, make sure you've got **[NodeJS](http://nodejs.org)** installed. If not, go to **[nodejs.org](http://nodejs.org)** to download and install it. It will also install NPM.
+
+Then, clone or fork this repo and install the project.
 
 ```bash
 $ git clone --depth 1 https://github.com/phiphou/vine-backup.git
@@ -25,13 +27,25 @@ $ yarn
 
 ## Usage
 
-Then, run the app and provide it your Vine credentials with :
+### Owner's Vines
+
+Run the app and provide it your Vine credentials with :
 
 ```bash
 $ node src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD
 ```
 
-The app will get the list of all your Vines and download them sequentially in the `Vines` folder.
+The app will get the list of all your Vines and download them sequentially in the `./Vines/me` folder.
+
+### Liked Vines
+
+You can also download the Vines you liked in addition to your own vines by adding a `--likes` flag:
+
+```bash
+$ node src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --likes
+```
+
+The app will store liked Vines in the `./Vines/likes` folder.
 
 ![GIF](https://dl.dropboxusercontent.com/u/55433448/vine-backup-anim.gif)
 
