@@ -11,8 +11,23 @@ if (!argv.email) {
 } else {
   console.log('Getting Vines list...')
   vine.login(argv.email, argv.password, function(error, client) {
-    if(error)
+    if(error){
       console.log('Unable to connect, please check your credentials.')
+    } else {
+      if(argv.likes)
+        getLikes(client)
+      else
+        getList(client)
+    }
+  })
+}
+
+function getLikes(client, page = 0) {
+  client.likes(client.userId, {page: page}, (error, user) => {
+    for (let r of user.records)
+      videos.push({type: 'like', data: r})
+    if (user.nextPage !== null)
+      getLikes(client, user.nextPage)
     else
       getList(client)
   })
@@ -21,7 +36,7 @@ if (!argv.email) {
 function getList(client, page = 0) {
   client.user(client.userId, {page: page}, (error, user) => {
     for (let r of user.records)
-      videos.push(r)
+      videos.push({type: 'me', data: r})
     if (user.nextPage !== null) {
       getList(client, user.nextPage)
     } else {
@@ -32,15 +47,17 @@ function getList(client, page = 0) {
 }
 
 function dl() {
-  download(videos[0].videoUrl, {
-    directory: "Vines",
-    filename: videos[0].postId + '.mp4'
+  download(videos[0].data.videoUrl, {
+    directory: "Vines/" + videos[0].type,
+    filename: videos[0].data.postId + '.mp4'
   }, err => {
     if (err)
-      console.log(err, videos[0].postId)
+      console.log(err, videos[0].data.postId)
     videos.shift()
     if (videos.length > 0) {
-      console.log('Vine with id: ' + videos[0].postId + ' downloaded, ' + videos.length + ' remaining.')
+      console.log('Vine with id: ' + videos[0].data.postId.substr(0,5)
+      + '...' +  videos[0].data.postId.substr(-5,5)
+      + ' downloaded, ' + videos.length + ' remaining.')
       dl()
     } else {
       console.log('Finish !')
