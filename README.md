@@ -18,7 +18,7 @@ Then run the app and provide it your Vine credentials with :
 ```bash
 $ node src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD
 ```
-
+![GIF](https://dl.dropboxusercontent.com/u/55433448/vine-backup-anim.gif)
 
 ## Install
 
@@ -40,7 +40,7 @@ $ yarn
 
 ## Usage
 
-### Owner's Vines
+#### Owner's Vines
 
 Run the app and provide it your Vine credentials with :
 
@@ -50,7 +50,7 @@ $ node src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD
 
 The app will get the list of all your Vines and download them sequentially in the `./Vines/me` folder.
 
-### Liked Vines
+#### Liked Vines
 
 You can also download the Vines you liked in addition to your own vines by adding a `--likes` flag:
 
@@ -59,8 +59,6 @@ $ node src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --likes
 ```
 
 The app will store liked Vines in the `./Vines/likes` folder.
-
-![GIF](https://dl.dropboxusercontent.com/u/55433448/vine-backup-anim.gif)
 
 ## License
 
