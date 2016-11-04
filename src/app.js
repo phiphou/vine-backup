@@ -25,7 +25,7 @@ if (!argv.email) {
 function getLikes(client, page = 0) {
   client.likes(client.userId, {page: page}, (error, user) => {
     for (let r of user.records)
-      videos.push({type: 'like', data: r})
+      videos.push({type: 'likes', data: r})
     if (user.nextPage !== null)
       getLikes(client, user.nextPage)
     else
