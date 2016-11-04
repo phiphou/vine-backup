@@ -14,11 +14,15 @@ if (!argv.email) {
     if(error){
       console.log('Unable to connect, please check your credentials.')
     } else {
-      if(argv.likes)
-        getLikes(client)
-      else
-        getList(client)
-    }
+      if(argv.user) {
+        getUserVines(client, argv.user)
+      } else {
+        if(argv.likes)
+          getLikes(client)
+        else
+          getList(client, client.userId, 'Me')
+        }
+      }
   })
 }
 
@@ -29,16 +33,28 @@ function getLikes(client, page = 0) {
     if (user.nextPage !== null)
       getLikes(client, user.nextPage)
     else
-      getList(client)
+      getList(client, client.userId, 'Me')
   })
 }
 
-function getList(client, page = 0) {
-  client.user(client.userId, {page: page}, (error, user) => {
+function getUserVines(client,twitterScreenName) {
+  client.searchUsers(twitterScreenName, (error, user) => {
+    if(!error){
+      if(user.records.count == 0)
+        console.log('user not found')
+      else {
+        getList(client, user.records[0].userId, twitterScreenName)
+      }
+    }
+  })
+}
+
+function getList(client, userId, userName, page = 0) {
+  client.user(userId, {page: page}, (error, user) => {
     for (let r of user.records)
-      videos.push({type: 'me', data: r})
+      videos.push({type: userName, data: r})
     if (user.nextPage !== null) {
-      getList(client, user.nextPage)
+      getList(client, userId, userName, user.nextPage)
     } else {
       console.log(videos.length + ' Vines to download.')
       dl()
