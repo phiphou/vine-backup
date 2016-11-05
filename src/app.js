@@ -1,4 +1,4 @@
-const Vineapple = require('vineapple');
+const Vineapple = require('vineapple')
 const download = require('download-file')
 const argv = require('yargs').argv
 const vine = new Vineapple()
@@ -10,70 +10,79 @@ if (!argv.email) {
   console.log('You must specify a password arg, like -password MY_PASSWORD')
 } else {
   console.log('Getting Vines list...')
-  vine.login(argv.email, argv.password, function(error, client) {
-    if(error){
+  vine.login(argv.email, argv.password, function (error, client) {
+    if (error) {
       console.log('Unable to connect, please check your credentials.')
     } else {
-      if(argv.user) {
+      if (argv.user) {
         getUserVines(client, argv.user)
       } else {
-        if(argv.likes)
+        if (argv.likes) {
           getLikes(client)
-        else
+        } else {
           getList(client, client.userId, 'Me')
         }
       }
+    }
   })
 }
 
-function getLikes(client, page = 0) {
+function getLikes (client, page = 0) {
   client.likes(client.userId, {page: page}, (error, user) => {
-    for (let r of user.records)
-      videos.push({type: 'likes', data: r})
-    if (user.nextPage !== null)
-      getLikes(client, user.nextPage)
-    else
-      getList(client, client.userId, 'Me')
+    if (!error) {
+      for (let r of user.records) {
+        videos.push({type: 'likes', data: r})
+      }
+      if (user.nextPage !== null) {
+        getLikes(client, user.nextPage)
+      } else {
+        getList(client, client.userId, 'Me')
+      }
+    }
   })
 }
 
-function getUserVines(client,twitterScreenName) {
+function getUserVines (client, twitterScreenName) {
   client.searchUsers(twitterScreenName, (error, user) => {
-    if(!error){
-      if(user.records.count == 0)
+    if (!error) {
+      if (user.records.count === 0) {
         console.log('user not found')
-      else {
+      } else {
         getList(client, user.records[0].userId, twitterScreenName)
       }
     }
   })
 }
 
-function getList(client, userId, userName, page = 0) {
+function getList (client, userId, userName, page = 0) {
   client.user(userId, {page: page}, (error, user) => {
-    for (let r of user.records)
-      videos.push({type: userName, data: r})
-    if (user.nextPage !== null) {
-      getList(client, userId, userName, user.nextPage)
-    } else {
-      console.log(videos.length + ' Vines to download.')
-      dl()
+    if (!error) {
+      for (let r of user.records) {
+        videos.push({type: userName, data: r})
+      }
+      if (user.nextPage !== null) {
+        getList(client, userId, userName, user.nextPage)
+      } else {
+        console.log(videos.length + ' Vines to download.')
+        dl()
+      }
     }
   })
 }
 
-function dl() {
+function dl () {
   download(videos[0].data.videoUrl, {
-    directory: "Vines/" + videos[0].type,
+    directory: 'Vines/' + videos[0].type,
     filename: videos[0].data.postId + '.mp4'
   }, err => {
-    if (err)
+    if (err) {
       console.log(err, videos[0].data.postId)
+    }
     videos.shift()
     if (videos.length > 0) {
-      console.log('Vine with id: ' + videos[0].data.postId.substr(0,5)
-      + '...' +  videos[0].data.postId.substr(-5,5)
-      + ' downloaded, ' + videos.length + ' remaining.')
+      console.log('Vine with id: ' + videos[0].data.postId.substr(0, 5) +
+      '...' + videos[0].data.postId.substr(-5, 5) +
+      ' downloaded, ' + videos.length + ' remaining.')
       dl()
     } else {
       console.log('Finish !')
