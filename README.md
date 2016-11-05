@@ -60,6 +60,24 @@ $ node src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --likes
 
 The app will store liked Vines in the `./Vines/likes` folder.
 
+#### Any user Vines
+
+<<<<<<< HEAD
+You can download the Vines from any user by adding a `--user` flag and providing it any Twitter user screen_name.
+=======
+You can download the Vines from any user by adding a `--user` flag and providing any Twitter user screen_name.
+>>>>>>> master
+
+```bash
+$ node src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --user ANY_TWITTER_SCREEN_NAME
+```
+
+<<<<<<< HEAD
+The app will store liked Vines in the `./Vines/[ANY_TWITTER_SCREEN_NAME]` folder.
+=======
+The app will store Vines in the `./Vines/[ANY_TWITTER_SCREEN_NAME]` folder.
+>>>>>>> master
+
 ## License
 
 This project is licensed under the terms of the **[MIT license](https://opensource.org/licenses/MIT)**.
