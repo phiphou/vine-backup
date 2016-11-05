@@ -1,8 +1,8 @@
-[![GitHub version](https://badge.fury.io/gh/phiphou%2Fvine-backup.svg)](https://badge.fury.io/gh/phiphou%2Fvine-backup) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![Code Climate](https://codeclimate.com/github/phiphou/vine-backup/badges/gpa.svg)](https://codeclimate.com/github/phiphou/vine-backup) [![Dependency Status](https://david-dm.org/phiphou/vine-backup.svg)](https://david-dm.org/phiphou/vine-backup) [![MIT license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](http://opensource.org/licenses/MIT) ![Size](https://reposs.herokuapp.com/?path=phiphou/vine-backup)
+[![GitHub version](https://badge.fury.io/gh/phiphou%2Fvine-backup.svg)](https://badge.fury.io/gh/phiphou%2Fvine-backup) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![Dependency Status](https://david-dm.org/phiphou/vine-backup.svg)](https://david-dm.org/phiphou/vine-backup) [![MIT license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](http://opensource.org/licenses/MIT) ![Size](https://reposs.herokuapp.com/?path=phiphou/vine-backup)
 
 # vine-backup
 
-A very basic project to backup your **[Vines](https://vine.co/)** (and optionnaly the one you liked) before the service shut down, as **[announced](http://blog.vine.co/post/152386882201/important-news-about-vine)** recently.
+A very basic project to backup your **[Vines](https://vine.co/)** (and optionnaly the one you liked) or any other user Vines before the service shut down, as **[announced](http://blog.vine.co/post/152386882201/important-news-about-vine)** recently.
 
 ## Quick start
 
@@ -45,7 +45,7 @@ $ yarn
 Run the app and provide it your Vine credentials with :
 
 ```bash
-$ node src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD
+$ node ./src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD
 ```
 
 The app will get the list of all your Vines and download them sequentially in the `./Vines/me` folder.
@@ -55,28 +55,20 @@ The app will get the list of all your Vines and download them sequentially in th
 You can also download the Vines you liked in addition to your own vines by adding a `--likes` flag:
 
 ```bash
-$ node src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --likes
+$ node ./src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --likes
 ```
 
 The app will store liked Vines in the `./Vines/likes` folder.
 
 #### Any user Vines
 
-<<<<<<< HEAD
-You can download the Vines from any user by adding a `--user` flag and providing it any Twitter user screen_name.
-=======
-You can download the Vines from any user by adding a `--user` flag and providing any Twitter user screen_name.
->>>>>>> master
+You can download the Vines from any user by adding a `--user` flag and providing any Twitter user screen_name. Any `--likes` flag wil then be ignored.
 
 ```bash
-$ node src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --user ANY_TWITTER_SCREEN_NAME
+$ node ./src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --user ANY_TWITTER_SCREEN_NAME
 ```
 
-<<<<<<< HEAD
-The app will store liked Vines in the `./Vines/[ANY_TWITTER_SCREEN_NAME]` folder.
-=======
 The app will store Vines in the `./Vines/[ANY_TWITTER_SCREEN_NAME]` folder.
->>>>>>> master
 
 ## License
 
