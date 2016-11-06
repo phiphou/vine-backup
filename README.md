@@ -70,6 +70,22 @@ $ node ./src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --user ANY_TWITT
 
 The app will store Vines in the `./Vines/[ANY_TWITTER_SCREEN_NAME]` folder.
 
+#### Export links list
+
+You can export a list of the Vines URLs instead of download them by adding a `--list` flag.
+
+```bash
+$ node ./src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --list
+```
+
+The app will write a links list text file in the `./Vines/vines_links_list.txt` folder.
+
+You can then use the list with `WGET` for instance :
+
+```bash
+wget -i vine_link_list.txt
+```
+
 ## License
 
 This project is licensed under the terms of the **[MIT license](https://opensource.org/licenses/MIT)**.

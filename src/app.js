@@ -1,3 +1,4 @@
+const fs = require('fs')
 const Vineapple = require('vineapple')
 const download = require('download-file')
 const argv = require('yargs').argv
@@ -63,10 +64,27 @@ function getList (client, userId, userName, page = 0) {
       if (user.nextPage !== null) {
         getList(client, userId, userName, user.nextPage)
       } else {
-        console.log(videos.length + ' Vines to download.')
-        dl()
+        if (argv.list) {
+          exportList()
+        } else {
+          console.log(videos.length + ' Vines to download.')
+          dl()
+        }
       }
     }
+  })
+}
+
+function exportList () {
+  let output = ''
+  for (let vine of videos) {
+    output += vine.data.videoUrl.replace(/\?[^\?]+$/, '') + '\n'
+  }
+  fs.writeFile('./Vines/vine_link_list.txt', output, err => {
+    if (err) {
+      return console.log(err)
+    }
+    console.log('The list of links was saved in ./Vines/vines_links_list.txt !')
   })
 }
 
