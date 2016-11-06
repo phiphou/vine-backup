@@ -1,8 +1,9 @@
-[![GitHub version](https://img.shields.io/npm/v/vine-backup.svg)](https://www.npmjs.com/package/vine-backup) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![Dependency Status](https://david-dm.org/phiphou/vine-backup.svg)](https://david-dm.org/phiphou/vine-backup) [![MIT license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](http://opensource.org/licenses/MIT) ![Size](https://reposs.herokuapp.com/?path=phiphou/vine-backup)
+![](https://img.shields.io/badge/Vine-backup-green.svg?style=flat&colorA=5c5c5c&colorB=41bb13) [![NPM version](https://img.shields.io/npm/v/vine-backup.svg)](https://www.npmjs.com/package/vine-backup) [![GitHub release](https://img.shields.io/github/release/phiphou/vine-backup.svg)]()  [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![Dependency Status](https://david-dm.org/phiphou/vine-backup.svg)](https://david-dm.org/phiphou/vine-backup) [![MIT license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](http://opensource.org/licenses/MIT) ![Size](https://reposs.herokuapp.com/?path=phiphou/vine-backup)
+
 
 # vine-backup
 
-A very basic project to backup your **[Vines](https://vine.co/)** (and optionnaly the one you liked) or any other user Vines before the service shut down, as **[announced](http://blog.vine.co/post/152386882201/important-news-about-vine)** recently.
+A very basic project to backup your **[Vines](https://vine.co/)** (and optionnaly the ones you liked) or any other user Vines before the service shut down, as **[announced](http://blog.vine.co/post/152386882201/important-news-about-vine)** recently.
 
 ## Quick start
 
@@ -78,12 +79,12 @@ You can export a list of the Vines URLs instead of download them by adding a `--
 $ node ./src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --list
 ```
 
-The app will write a links list text file in the `./Vines/vines_links_list.txt` folder.
+The app will create a links list in the `./Vines/vines_links_list.txt` file.
 
 You can then use the list with `WGET` for instance :
 
 ```bash
-wget -i vine_link_list.txt
+$ wget -i vine_link_list.txt
 ```
 
 ## License
