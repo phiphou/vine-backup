@@ -1,4 +1,4 @@
-[![GitHub version](https://badge.fury.io/gh/phiphou%2Fvine-backup.svg)](https://badge.fury.io/gh/phiphou%2Fvine-backup) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![Dependency Status](https://david-dm.org/phiphou/vine-backup.svg)](https://david-dm.org/phiphou/vine-backup) [![MIT license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](http://opensource.org/licenses/MIT) ![Size](https://reposs.herokuapp.com/?path=phiphou/vine-backup)
+[![GitHub version](https://img.shields.io/npm/v/vine-backup.svg)](https://www.npmjs.com/package/vine-backup) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![Dependency Status](https://david-dm.org/phiphou/vine-backup.svg)](https://david-dm.org/phiphou/vine-backup) [![MIT license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](http://opensource.org/licenses/MIT) ![Size](https://reposs.herokuapp.com/?path=phiphou/vine-backup)
 
 # vine-backup
 
