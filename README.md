@@ -3,7 +3,7 @@
 
 # vine-backup
 
-A very basic project to backup your **[Vines](https://vine.co/)** (and optionnaly the ones you liked) or any other user Vines before the service shut down, as **[announced](http://blog.vine.co/post/152386882201/important-news-about-vine)** recently.
+A very basic project to backup your **[Vines](https://vine.co/)** (and optionnaly the ones you liked) or any other user Vines (and optionnaly the ones he liked) before the service shut down, as **[announced](http://blog.vine.co/post/152386882201/important-news-about-vine)** recently.
 
 ## Quick start
 
@@ -63,13 +63,15 @@ The app will store liked Vines in the `./Vines/likes` folder.
 
 #### Any user Vines
 
-You can download the Vines from any user by adding a `--user` flag and providing any Twitter user screen_name. Any `--likes` flag wil then be ignored.
+You can download the Vines from any user by adding a `--user` flag and providing any Twitter user screen_name.
+
+You also can add a `--likes` flag if you want to download Vines liked by the user.
 
 ```bash
 $ node ./src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --user ANY_TWITTER_SCREEN_NAME
 ```
 
-The app will store Vines in the `./Vines/[ANY_TWITTER_SCREEN_NAME]` folder.
+The app will store Vines in the `./Vines/[ANY_TWITTER_SCREEN_NAME]` folder and optionnaly likes in the `./Vines/[ANY_TWITTER_SCREEN_NAME]/likes` folder.
 
 #### Export links list
 

@@ -19,25 +19,25 @@ if (!argv.email) {
         getUserVines(client, argv.user)
       } else {
         if (argv.likes) {
-          getLikes(client)
+          getLikes(client, client.userId, client.username)
         } else {
-          getList(client, client.userId, 'Me')
+          getList(client, client.userId, client.username )
         }
       }
     }
   })
 }
 
-function getLikes (client, page = 0) {
-  client.likes(client.userId, {page: page}, (error, user) => {
+function getLikes (client, userId, userName, page = 0) {
+  client.likes(userId, {page: page}, (error, user) => {
     if (!error) {
       for (let r of user.records) {
-        videos.push({type: 'likes', data: r})
+        videos.push({type: userName + '/likes', data: r})
       }
       if (user.nextPage !== null) {
-        getLikes(client, user.nextPage)
+        getLikes(client,  userId, userName, user.nextPage)
       } else {
-        getList(client, client.userId, 'Me')
+        getList(client, userId, userName)
       }
     }
   })
@@ -49,7 +49,11 @@ function getUserVines (client, twitterScreenName) {
       if (user.records.count === 0) {
         console.log('user not found')
       } else {
-        getList(client, user.records[0].userId, twitterScreenName)
+        if (argv.user && argv.likes) {
+          getLikes(client, user.records[0].userId, twitterScreenName)
+        } else {
+          getList(client, user.records[0].userId, twitterScreenName)
+        }
       }
     }
   })
