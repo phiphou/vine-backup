@@ -21,7 +21,7 @@ if (!argv.email) {
         if (argv.likes) {
           getLikes(client, client.userId, client.username)
         } else {
-          getList(client, client.userId, client.username )
+          getList(client, client.userId, client.username)
         }
       }
     }
@@ -35,7 +35,7 @@ function getLikes (client, userId, userName, page = 0) {
         videos.push({type: userName + '/likes', data: r})
       }
       if (user.nextPage !== null) {
-        getLikes(client,  userId, userName, user.nextPage)
+        getLikes(client, userId, userName, user.nextPage)
       } else {
         getList(client, userId, userName)
       }
