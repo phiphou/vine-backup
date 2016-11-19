@@ -89,6 +89,12 @@ You can then use the list with `WGET` for instance :
 $ wget -i vine_link_list.txt
 ```
 
+#### Filenames
+
+By default, Vines filenames are in the form `{POST_ID}.mp4`.
+
+If you add a `--dates` flag, it will be `{YYYY-MM-DD_HH-MM-SS}_{POST_ID}.mp4`
+
 ## License
 
 This project is licensed under the terms of the **[MIT license](https://opensource.org/licenses/MIT)**.

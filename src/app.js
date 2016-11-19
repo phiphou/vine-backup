@@ -92,10 +92,16 @@ function exportList () {
   })
 }
 
+function make_filename(data){
+  let da = videos[0].data.created.split('T')
+  let time = ('' + da[1].split('.')[0]).replace(/:/g, '-');
+  return (argv.dates ? da[0] + '_' + time + '_' : '') + data.postId + '.mp4'
+}
+
 function dl () {
   download(videos[0].data.videoUrl, {
     directory: 'Vines/' + videos[0].type,
-    filename: videos[0].data.postId + '.mp4'
+    filename: make_filename(videos[0].data),
   }, err => {
     if (err) {
       console.log(err, videos[0].data.postId)
