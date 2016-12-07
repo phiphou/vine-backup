@@ -61,9 +61,15 @@ function getUserVines (client, twitterScreenName) {
 
 function getList (client, userId, userName, page = 0) {
   client.user(userId, {page: page}, (error, user) => {
+    console.log(error)
     if (!error) {
       for (let r of user.records) {
-        videos.push({type: userName, data: r})
+        if(argv.no_reposts) {
+          if(r.repost != undefined)
+            videos.push({type: userName, data: r})
+        } else {
+          videos.push({type: userName, data: r})
+        }
       }
       if (user.nextPage !== null) {
         getList(client, userId, userName, user.nextPage)
@@ -72,7 +78,7 @@ function getList (client, userId, userName, page = 0) {
           exportList()
         } else {
           console.log(videos.length + ' Vines to download.')
-          dl()
+          // dl()
         }
       }
     }

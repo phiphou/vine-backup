@@ -95,6 +95,15 @@ By default, Vines filenames are in the form `{POST_ID}.mp4`.
 
 If you add a `--dates` flag, it will be `{YYYY-MM-DD_HH-MM-SS}_{POST_ID}.mp4`
 
+
+#### No_reposts
+
+By default, reposted Vines are downloaded. You can pass a `no_reposts` flag to avoid downloading them.
+
+```bash
+$ node ./src/app.js --email YOUR_EMAIL --password YOUR_PASSWORD --no_reposts
+```
+
 ## License
 
 This project is licensed under the terms of the **[MIT license](https://opensource.org/licenses/MIT)**.
