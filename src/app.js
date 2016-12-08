@@ -3,7 +3,18 @@ const Vineapple = require('vineapple');
 const download = require('download-file');
 const argv = require('yargs').argv;
 const vine = new Vineapple();
+const defaults = {
+  page_size: 100
+};
 let videos = [];
+
+if (!argv.page_size) {
+  argv.page_size = defaults.page_size;
+} else {
+  if (typeof(argv.page_size) != "number") {
+    console.log('The page size arg was not a number');
+  }
+}
 
 if (!argv.email) {
   console.log('You must specify an email arg, like -email MY_EMAIL@MY_PROVIDER.COM');
@@ -13,16 +24,17 @@ if (!argv.email) {
   console.log('Getting Vines list...');
   vine.login(argv.email, argv.password, function (error, client) {
     if (error) {
-      console.log('Unable to connect, please check your credentials.');
+      console.error('Unable to connect, please check your credentials.', error);
+      return;
+    }
+
+    if (argv.user) {
+      getUserVines(client, argv.user);
     } else {
-      if (argv.user) {
-        getUserVines(client, argv.user);
+      if (argv.likes) {
+        getLikes(client, client.userId, client.username);
       } else {
-        if (argv.likes) {
-          getLikes(client, client.userId, client.username);
-        } else {
-          getList(client, client.userId, client.username);
-        }
+        getList(client, client.userId, client.username);
       }
     }
   });
@@ -30,59 +42,68 @@ if (!argv.email) {
 
 function getLikes (client, userId, userName, page = 0) {
   client.likes(userId, {page: page}, (error, user) => {
-    if (!error) {
-      for (let r of user.records) {
-        videos.push({type: userName + '/likes', data: r});
-      }
-      if (user.nextPage !== null) {
-        getLikes(client, userId, userName, user.nextPage);
-      } else {
-        getList(client, userId, userName);
-      }
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    for (let r of user.records) {
+      videos.push({type: userName + '/likes', data: r});
+    }
+    if (user.nextPage !== null) {
+      getLikes(client, userId, userName, user.nextPage);
+    } else {
+      getList(client, userId, userName);
     }
   });
 }
 
 function getUserVines (client, twitterScreenName) {
   client.searchUsers(twitterScreenName, (error, user) => {
-    if (!error) {
-      if (user.records.count === 0) {
-        console.log('user not found');
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    if (user.records.count === 0) {
+      console.log('user not found');
+    } else {
+      if (argv.user && argv.likes) {
+        getLikes(client, user.records[0].userId, twitterScreenName);
       } else {
-        if (argv.user && argv.likes) {
-          getLikes(client, user.records[0].userId, twitterScreenName);
-        } else {
-          getList(client, user.records[0].userId, twitterScreenName);
-        }
+        getList(client, user.records[0].userId, twitterScreenName);
       }
     }
   });
 }
 
 function getList (client, userId, userName, page = 0) {
-  client.user(userId, {page: page,size: 100}, (error, user) => {
-    if (!error) {
-      console.log(user)
-      // for (let r of user.records) {
-      //   isRepost = r.repost !== undefined;
-      //   if (
-      //     (argv.no_reposts   && isRepost) ||
-      //     (argv.only_reposts && !isRepost)
-      //   ) {
-      //     continue;
-      //   }
-      //   videos.push({type: userName, data: r});
-      // }
-      // if (user.nextPage !== null) {
-      //   getList(client, userId, userName, user.nextPage);
-      // } else {
-      //   if (argv.list) {
-      //     exportList();
-      //   } else {
-      //     console.log(videos.length + ' Vines to download.');
-      //     dl();
-      //   }
-      // }
+  client.user(userId, {page: page,size: argv.page_size}, (error, user) => {
+    if (error) {
+      console.log("AREN");
+      console.error(error);
+      return;
+    }
+
+    for (let r of user.records) {
+      isRepost = r.repost !== undefined;
+      if (
+        (argv.no_reposts   && isRepost) ||
+        (argv.only_reposts && !isRepost)
+      ) {
+        continue;
+      }
+      videos.push({type: userName, data: r});
+    }
+    if (user.nextPage !== null) {
+      getList(client, userId, userName, user.nextPage);
+    } else {
+      if (argv.list) {
+        exportList();
+      } else {
+        console.log(videos.length + ' Vines to download.');
+        dl();
+      }
     }
   });
 }
