@@ -60,28 +60,29 @@ function getUserVines (client, twitterScreenName) {
 }
 
 function getList (client, userId, userName, page = 0) {
-  client.user(userId, {page: page}, (error, user) => {
+  client.user(userId, {page: page,size: 100}, (error, user) => {
     if (!error) {
-      for (let r of user.records) {
-        isRepost = r.repost !== undefined;
-        if (
-          (argv.no_reposts   && isRepost) ||
-          (argv.only_reposts && !isRepost)
-        ) {
-          continue;
-        }
-        videos.push({type: userName, data: r});
-      }
-      if (user.nextPage !== null) {
-        getList(client, userId, userName, user.nextPage);
-      } else {
-        if (argv.list) {
-          exportList();
-        } else {
-          console.log(videos.length + ' Vines to download.');
-          dl();
-        }
-      }
+      console.log(user)
+      // for (let r of user.records) {
+      //   isRepost = r.repost !== undefined;
+      //   if (
+      //     (argv.no_reposts   && isRepost) ||
+      //     (argv.only_reposts && !isRepost)
+      //   ) {
+      //     continue;
+      //   }
+      //   videos.push({type: userName, data: r});
+      // }
+      // if (user.nextPage !== null) {
+      //   getList(client, userId, userName, user.nextPage);
+      // } else {
+      //   if (argv.list) {
+      //     exportList();
+      //   } else {
+      //     console.log(videos.length + ' Vines to download.');
+      //     dl();
+      //   }
+      // }
     }
   });
 }
