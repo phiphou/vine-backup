@@ -1,6 +1,6 @@
 {
   "name": "vine-backup",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A very basic tool for downloading your Vines before the service shut down.",
   "author": {
     "name": "Phiphou",
@@ -18,6 +18,6 @@
   "dependencies": {
     "download-file": "^0.1.5",
     "vineapple": "^0.1.5",
-    "yargs": "^6.3.0"
+    "yargs": "^6.5.0"
   }
 }
